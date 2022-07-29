@@ -16,6 +16,11 @@ questions = [
       name: 'email',
     },
     {
+      type: 'input',
+      message: 'What is the title of this project?',
+      name: 'title',
+    },
+    {
       type: 'rawlist',
       message: 'What license is this project under?',
       name: 'license',
@@ -94,12 +99,75 @@ inquirer
   .prompt(questions)
 
   .then((response) =>
-    writeToFile('README', response)
+    writeToFile('README.md', response)
   );
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-  
+  switch (data.license) {
+    case 'GNU':
+      data.license = data.GNU;
+      break;
+    
+    case 'BSD':
+      data.license = data.BSD;
+      break;
+    
+    case 'creativeCommons':
+      data.license = data.creativeCommons;
+      break;
+
+    case 'hippocratic':
+      data.license = data.hippocratic;
+      break;
+
+    case 'openDataCommons':
+      data.license = data.openDataCommons;
+      break;
+
+    case 'perl':
+      data.license = data.perl;
+      break;
+  }
+
+
+  content = `# ${data.title}
+
+## Table of Contents
+* [Description](#description)
+* [Installation Instructions](#installation-instructions)
+* [Usage Information](#usage-information)
+* [Contribution Guidelines](#contribution-guidelines)
+* [Test Instructions](#test-instructions)
+* [License Information](#license-information)
+
+### Description
+${data.description}
+
+### Installation Instructions
+${data.installation}
+
+### Usage Information
+${data.usage}
+
+###  Contribution Guidelines
+${data.contribution}
+
+### Test Instructions
+${data.test}
+
+### License Information
+${data.license}
+
+### Questions?
+Contact me at ${data.email} or visit my GitHub at [https://github.com/${data.username}](https://github.com/${data.username})
+`
+
+  fs.writeFile(`./${fileName}`,content, err => {
+    if (err) {
+      console.error(err)
+    }
+  })
 }
 
 // TODO: Create a function to initialize app
