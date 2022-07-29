@@ -113,7 +113,7 @@ function writeToFile(fileName, data) {
       data.license = data.BSD;
       break;
     
-    case 'creativeCommons':
+    case 'Creative Commons':
       data.license = data.creativeCommons;
       break;
 
@@ -121,7 +121,7 @@ function writeToFile(fileName, data) {
       data.license = data.hippocratic;
       break;
 
-    case 'openDataCommons':
+    case 'Open Data Commons':
       data.license = data.openDataCommons;
       break;
 
