@@ -11,6 +11,11 @@ questions = [
       name: 'username',
     },
     {
+      type: 'input',
+      message: 'What is your email?',
+      name: 'email',
+    },
+    {
       type: 'rawlist',
       message: 'What license is this project under?',
       name: 'license',
@@ -20,43 +25,68 @@ questions = [
         type: 'rawlist',
         message: 'Which version of the BSD license?',
         choices: ['BSD 2 clause', 'BSD 3 clause'],
+        name: 'BSD',
         when: (answers) => answers.license === 'BSD',
-        name:
     },
     {
         type: 'rawlist',
         message: 'Which version of Creative Commons license?',
         choices: ['CC0', 'Attribution 4.0 International', 'Attribution-ShareAlike 4.0 International', 'Attribution-NonCommercial 4.0 International', 'Attribution-NoDerivates 4.0 International', 'Attribution-NonCommmercial-ShareAlike 4.0 International', 'Attribution-NonCommercial-NoDerivatives 4.0 International'],
+        name: 'creativeCommons',
         when: (answers) => answers.license === 'Creative Commons',
     },
     {
         type: 'rawlist',
         message: 'Which version of the GNU license?',
         choices: ['GNU GPL v3', 'GNU GPL v2', 'GNU AGPL v3', 'GNU LGPL v3', 'GNU FDL v1.3'],
+        name: 'GNU',
         when: (answers) => answers.license === 'GNU',
     },
     {
         type: 'rawlist',
         message: 'Which version of the Hippocratic license?',
         choices: ['The Hippocratic License 3.0', 'The Hippocratic License 2.1'],
+        name: "hippocratic",
         when: (answers) => answers.license === 'The Hippocratic License',
     },
     {
         type: 'rawlist',
         message: 'Which Open Data Commons license?',
         choices: ['Attribution License', 'Open Database License', 'Public Domain Dedication and License'],
+        name: 'openDataCommons',
         when: (answers) => answers.license === 'Open Data Commons',
     },
     {
         type: 'rawlist',
         message: 'Which version of the Perl license?',
         choices: ['The Perl License', 'The Artistic License 2.0'],
+        name: 'perl',
         when: (answers) => answers.license === 'Perl',
     },
     {
       type: 'input',
-      message: 'Re-enter password to confirm:',
-      name: 'confirm',
+      message: 'How would you describe this project?',
+      name: 'description',
+    },
+    {
+      type:'input',
+      message: 'How do you use this project?',
+      name:'usage',
+    },
+    {
+      type: 'input',
+      message: 'How do you install this project?',
+      name: 'installation',
+    },
+    {
+    type: 'input',
+    message: 'How do you test this project?',
+    name: 'test',
+    },
+    {
+      type: 'input',
+      message: 'How could someone contribute to this project?',
+      name: 'contribution',
     },
   ]
 
@@ -64,13 +94,13 @@ inquirer
   .prompt(questions)
 
   .then((response) =>
-    response.confirm === response.password
-      ? console.log('Success!')
-      : console.log('You forgot your password already?!')
+    writeToFile('README', response)
   );
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+  
+}
 
 // TODO: Create a function to initialize app
 function init() {}
