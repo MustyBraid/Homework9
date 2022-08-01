@@ -1,8 +1,8 @@
-// TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-// TODO: Create an array of questions for user input
+
+// Both of these arrays hold things that are used in inquirer, they're only defined outside of the prompt to keep things clean-ish
 licenses = ['Apache 2.0', 'Boost', 'BSD', 'Creative Commons', 'Eclipse Public License 1.0', 'GNU', 'The Hippocratic License', 'IBM Public License v1.0', 'ISC License', 'The MIT License', 'Mozilla Public License 2.0', 'Open Data Commons', 'Perl', 'SIL', 'The Unlicense', 'WTFPL', 'Zlib']
 questions = [
     {
@@ -102,8 +102,10 @@ inquirer
     writeToFile('README.md', response)
   );
 
-// TODO: Create a function to write README file
+//This function writes the actual README
+
 function writeToFile(fileName, data) {
+  //This switch statement updates the license section of the data object if the user selected a license which prompted more questions
   switch (data.license) {
     case 'GNU':
       data.license = data.GNU;
@@ -130,7 +132,7 @@ function writeToFile(fileName, data) {
       break;
   }
 
-
+//This large, ugly string generates the markdown file with some markdown-specific formatting. All the relevant data from inquirer is inserted as string literals
   content = `# ${data.title}
 
 ## Table of Contents
@@ -169,9 +171,3 @@ Contact me at ${data.email} or visit my GitHub at [https://github.com/${data.use
     }
   })
 }
-
-// TODO: Create a function to initialize app
-function init() {}
-
-// Function call to initialize app
-init();
